@@ -1,0 +1,55 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background: #840;
+}
+
+div#nav {
+    height: 48px;
+    width: calc(100% - 1rem);
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    animation: slideIn 1s ease forwards;
+}
+
+div.nav-button {
+    color: white;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    animation: fadeIn 0.5s 0.5s ease forwards;
+}
+
+div.nav-button:hover {
+    backdrop-filter: brightness(0.8);
+}
+
+div.nav-button:active {
+    backdrop-filter: brightness(0.6);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        translate: -100%;
+    }
+
+    to {
+        translate: 0%;
+    }
+}

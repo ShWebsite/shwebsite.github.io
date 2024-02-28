@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shite Website</title>
+
+    <link rel="stylesheet" href="site.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="js/british.js"></script>
+    <script src="js/short.js"></script>
+</head>
+
+<body>
+    <iframe frameborder="0" allowtransparency id="nav-object" src="nav.html"></iframe>
+    <div id="main-content">
+        <h1>Welcome to shite.website!</h1>
+        <p>Pssst. It's shite.</p>
+        <h1 id="shite">💩</h1>
+    </div>
+    <script>
+        let direction = Maths.gibberish * 360;
+        let x = 0;
+        let y = 0;
+        let mousedown = false;
+        const mouse = {
+            clientX: 0,
+            clientY: 0,
+            originX: 0,
+            originY: 0
+        }
+        const shite = document.querySelector('h1#shite');
+        shite.addEventListener('mousedown', (e) => {
+            mousedown = true;
+            mouse.originX = e.clientX - (x + (window.innerWidth / 2));
+            mouse.originY = e.clientY - (y + (window.innerHeight / 2));
+        });
+        document.body.addEventListener('mouseup', () => {
+            mousedown = false;
+        });
+        document.body.addEventListener('mousemove', (e) => {
+            mouse.clientX = e.clientX;
+            mouse.clientY = e.clientY;
+        });
+        function renderShite() {
+
+            const speed = Maths.max(window.innerWidth / 1000, 1) * 1.5;
+            function move() {
+                x += Maths.sin(direction * (pi / 180)) * speed / ((parseFloat(getComputedStyle(shite).scale) - 1) * 2);
+                y += Maths.cos(direction * (pi / 180)) * speed / ((parseFloat(getComputedStyle(shite).scale) - 1) * 2);
+            }
+            if (mousedown) {
+                x = mouse.clientX - (window.innerWidth / 2) - mouse.originX;
+                y = mouse.clientY - (window.innerHeight / 2) - mouse.originY;
+            } else {
+                move();
+            }
+
+            if (x > (window.innerWidth / 2) - shite.clientWidth) {
+                direction = 360-direction;
+                move();
+            }
+
+            if (x < (window.innerWidth / -2)) {
+                direction = 360-direction;
+                move();
+            }
+
+            if (y > (window.innerHeight / 2) - shite.clientHeight) {
+                direction = 180-direction;
+                move();
+            }
+
+            if (y < (window.innerHeight / -2) + 48) {
+                direction = 180-direction;
+                move();
+            }
+            shite.style.translate = `${x}px ${y}px`;
+
+            requestAnimationFrame(arguments.callee);
+        }
+
+        renderShite();
+
+
+    </script>
+</body>
+
+</html>
